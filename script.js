@@ -33,3 +33,28 @@ function operate(operator, num1, num2) {
     let func = operatorMap(operator);
     return func(num1, num2)
 }
+
+let buttonsText = [
+    "AC", "+/-", "%", "+",
+    "7" , "8"  , "9", "-",
+    "4" , "5"  , "6", "*",
+    "1" , "2"  , "3", "/",
+    "." , "0"  , "="
+]
+
+// populate buttons
+let buttons = document.querySelector(".buttons");
+for (let i = 0; i < 19; i++) {
+    let button = document.createElement("div");
+    if (i < 3) {
+        button.classList = "special";
+    } else if ((i + 1) % 4 == 0) {
+        button.classList = "operator";
+    } else if (i == 18) {
+        button.id = "equals";
+    } else {
+        button.classList = "number";
+    }
+    button.textContent = buttonsText[i];
+    buttons.appendChild(button);
+}
