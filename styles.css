@@ -21,14 +21,19 @@ body {
 }
 
 .screen {
-    padding: 20px;
-    background-color: #B4BBC3;
-    flex: 1 1 0;
-    
+    padding: 0px 20px;
+    background-color: #CCCCCC;
+    flex: 0 0 100px;
+    display: flex;
+    align-items: center;
+    justify-content: right;
+    font-size: 70px;
+    font-weight: 700;
+    box-shadow: inset 2px 2px 20px 2px rgba(0, 0, 0, 0.1); 
 }
 
 .buttons {
-    flex: 5 1 0;
+    flex: 1 1 auto;
     display: flex;
     flex-wrap: wrap;
     padding: 5px;
@@ -50,21 +55,24 @@ body {
 .special {
     background-color: #D1E7F7;
     border: solid #A4B1C5 2px;
+    color: #A4B1C5;
 }
 
 .number {
     background-color: #ECDDF2;
     border: solid #B18CB7 2px;
+    color: #B18CB7;
 }
 
 .operator {
     background-color: #DBECDA;
     border: solid #A9CDA7 2px;
+    color: #A9CDA7;
 }
 
 #equals {
     flex: 1 1 47.4%;
     background-color: #FF9E4D;
     border: solid #D65729 2px;
+    color: #D65729;
 }
-
