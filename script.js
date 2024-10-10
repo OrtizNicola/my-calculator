@@ -96,6 +96,11 @@ for (let i = 0; i < 19; i++) {
     } else if ((i + 1) % 4 == 0) {
         button.classList.add("operator");
         button.addEventListener("click", () => {
+            if (operation != "") {
+                let e = new Event("click");
+                let equalsButton = document.querySelector(".equals");
+                equalsButton.dispatchEvent(e);
+            }
             storedValue = currValue;
             currValue = "";
             alreadyDecimal = false;
@@ -104,10 +109,19 @@ for (let i = 0; i < 19; i++) {
     } else if (i == 18) {
         button.classList.add("equals");
         button.addEventListener("click", () => {
-            currValue = operate(operation, storedValue, currValue);
-            storedValue = "";
-            justClickedEqual = true;
-            renderScreen();
+            if (storedValue && currValue) {
+                currValue = operate(operation, storedValue, currValue);
+                console.log(currValue);
+                if (currValue.length != 0 && currValue != "illegal") {
+                    let numValue = Number.parseFloat(currValue);
+                    numValue = Math.round(numValue * 10_000_000) / 10_000_000;
+                    currValue = numValue.toString();
+                }
+                storedValue = "";
+                justClickedEqual = true;
+                operation = "";
+                renderScreen();
+            }
         })
     } else {
         button.classList.add("number");
