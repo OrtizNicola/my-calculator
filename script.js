@@ -45,38 +45,37 @@ let storedValue = "";
 let operation;
 let alreadyDecimal = false;
 
-// populate buttons
-let buttons = document.querySelector(".buttons");
-for (let i = 0; i < 19; i++) {
-    let button = document.createElement("div");
-    button.textContent = buttonsText[i];
+function addPressedStyle(button, index) {
+    button.textContent = buttonsText[index];
     button.addEventListener("mousedown", () => {
         button.classList.toggle("pressed");
     })
     button.addEventListener("mouseup", () => {
         button.classList.toggle("pressed");
     })
+}
+
+// populate buttons
+let buttons = document.querySelector(".buttons");
+for (let i = 0; i < 19; i++) {
+    let button = document.createElement("div");
+    addPressedStyle(button, i);
     if (i < 3) {
         button.classList.add("special");
     } else if ((i + 1) % 4 == 0) {
         button.classList.add("operator");
     } else if (i == 18) {
-        button.id = "equals";
-    } else if (i == 16) {
-        button.classList.add("number");
-        button.addEventListener("click", () => {
-            if (!alreadyDecimal) {
-                displayValue += button.textContent;
-                screen.textContent = displayValue;
-                alreadyDecimal = true;
-            } 
-        })
+        button.classList.add("equals");
     } else {
         button.classList.add("number");
         button.addEventListener("click", () => {
-            displayValue += button.textContent;
+            if (i == 16 && !alreadyDecimal) {
+                displayValue += button.textContent;
+                alreadyDecimal = true;
+            } else if (i !=16) {
+                displayValue += button.textContent;
+            }
             screen.textContent = displayValue;
-            
         })
     }
     buttons.appendChild(button);

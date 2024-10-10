@@ -42,6 +42,10 @@ body {
     gap: 5px;
 }
 
+.buttons .equals {
+    flex: 1 1 47.4%;
+}
+
 .buttons div {
     flex: 1 1 22%;
     border-radius: 5px;
@@ -70,13 +74,12 @@ body {
     color: #A9CDA7;
 }
 
-#equals {
-    flex: 1 1 47.4%;
+.equals {
     background-color: #FF9E4D;
     border: solid #D65729 2px;
     color: #D65729;
 }
 
 .pressed {
-    background-color: red;
+    background-color: #FAFAD2;
 }
