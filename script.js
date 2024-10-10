@@ -12,7 +12,7 @@ function multiply(a, b) {
 }
 
 function divide(a, b) {
-    if (Number.parseFloat(b) !== 0) {
+    if (Number.parseFloat(b) == 0) {
         return "illegal"
     }
     return (Number.parseFloat(a) / Number.parseFloat(b)).toString();
@@ -43,6 +43,7 @@ let currValue = "";
 let storedValue = "";
 let operation;
 let alreadyDecimal = false;
+let justClickedEqual = false;
 
 function addPressedStyle(button, index) {
     button.textContent = buttonsText[index];
@@ -55,13 +56,13 @@ function addPressedStyle(button, index) {
 }
 
 function renderScreen() {
-    let displayValue;
-    if (currValue.length > 8) {
-        displayValue = currValue.slice(-8);
-    } else {
-        displayValue = currValue;
+    let n = currValue.length;
+    if (n > 18) {
+        alert("Too big, brother");
+        currValue = currValue.slice(-18);
     }
-    screen.textContent = displayValue;
+    screen.style.fontSize = `${70/(Math.pow(n, 0.28))}px`;
+    screen.textContent = currValue;
 }
 
 // populate buttons
@@ -97,18 +98,24 @@ for (let i = 0; i < 19; i++) {
         button.addEventListener("click", () => {
             storedValue = currValue;
             currValue = "";
+            alreadyDecimal = false;
             operation = button.textContent;
         })
     } else if (i == 18) {
         button.classList.add("equals");
         button.addEventListener("click", () => {
-            console.log(operatorMap[operation]);
             currValue = operate(operation, storedValue, currValue);
+            storedValue = "";
+            justClickedEqual = true;
             renderScreen();
         })
     } else {
         button.classList.add("number");
         button.addEventListener("click", () => {
+            if (justClickedEqual) {
+                currValue = "";
+                justClickedEqual = false;
+            }
             if (i == 16 && !alreadyDecimal) {
                 currValue += button.textContent;
                 alreadyDecimal = true;

@@ -27,7 +27,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: right;
-    font-size: 70px;
+    
     font-weight: 700;
     box-shadow: inset 2px 2px 20px 2px rgba(0, 0, 0, 0.1); 
 }
