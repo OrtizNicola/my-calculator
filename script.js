@@ -1,21 +1,21 @@
 // functions for math operators
 function add(a, b) {
-    return Number.parseFloat(a) + Number.parseFloat(b);
+    return (Number.parseFloat(a) + Number.parseFloat(b)).toString();
 }
 
 function substract(a, b) {
-    return Number.parseFloat(a) - Number.parseFloat(b);
+    return (Number.parseFloat(a) - Number.parseFloat(b)).toString();
 }
 
 function multiply(a, b) {
-    return Number.parseFloat(a) * Number.parseFloat(b);
+    return (Number.parseFloat(a) * Number.parseFloat(b)).toString();
 }
 
 function divide(a, b) {
     if (Number.parseFloat(b) !== 0) {
         return "illegal"
     }
-    return Number.parseFloat(a) / Number.parseFloat(b);
+    return (Number.parseFloat(a) / Number.parseFloat(b)).toString();
 }
 
 let operatorMap = {
@@ -26,8 +26,8 @@ let operatorMap = {
 }
 
 function operate(operator, num1, num2) {
-    let func = operatorMap(operator);
-    return func(num1, num2)
+    let f = operatorMap[operator];
+    return f(num1, num2)
 }
 
 let buttonsText = [
@@ -94,8 +94,18 @@ for (let i = 0; i < 19; i++) {
         }
     } else if ((i + 1) % 4 == 0) {
         button.classList.add("operator");
+        button.addEventListener("click", () => {
+            storedValue = currValue;
+            currValue = "";
+            operation = button.textContent;
+        })
     } else if (i == 18) {
         button.classList.add("equals");
+        button.addEventListener("click", () => {
+            console.log(operatorMap[operation]);
+            currValue = operate(operation, storedValue, currValue);
+            renderScreen();
+        })
     } else {
         button.classList.add("number");
         button.addEventListener("click", () => {
