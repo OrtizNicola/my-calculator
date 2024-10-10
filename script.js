@@ -1,21 +1,21 @@
 // functions for math operators
 function add(a, b) {
-    return Number.parseInt(a) + Number.parseInt(b);
+    return Number.parseFloat(a) + Number.parseFloat(b);
 }
 
 function substract(a, b) {
-    return Number.parseInt(a) - Number.parseInt(b);
+    return Number.parseFloat(a) - Number.parseFloat(b);
 }
 
 function multiply(a, b) {
-    return Number.parseInt(a) * Number.parseInt(b);
+    return Number.parseFloat(a) * Number.parseFloat(b);
 }
 
 function divide(a, b) {
-    if (Number.parseInt(b) !== 0) {
+    if (Number.parseFloat(b) !== 0) {
         return "illegal"
     }
-    return Number.parseInt(a) / Number.parseInt(b);
+    return Number.parseFloat(a) / Number.parseFloat(b);
 }
 
 let operatorMap = {
@@ -39,7 +39,6 @@ let buttonsText = [
 ]
 
 let screen = document.querySelector(".screen");
-let displayValue = "";
 let currValue = "";
 let storedValue = "";
 let operation;
@@ -55,6 +54,16 @@ function addPressedStyle(button, index) {
     })
 }
 
+function renderScreen() {
+    let displayValue;
+    if (currValue.length > 8) {
+        displayValue = currValue.slice(-8);
+    } else {
+        displayValue = currValue;
+    }
+    screen.textContent = displayValue;
+}
+
 // populate buttons
 let buttons = document.querySelector(".buttons");
 for (let i = 0; i < 19; i++) {
@@ -64,12 +73,25 @@ for (let i = 0; i < 19; i++) {
         button.classList.add("special");
         if (i == 0) {
             button.addEventListener("click", () => {
-                displayValue = "";
                 currValue = "";
                 storedValue = "";
-                screen.textContent = displayValue;
+                renderScreen();
             })
-        } 
+        } else if (i == 1) {
+            button.addEventListener("click", () => {
+                if (currValue[0] == "-") {
+                    currValue = currValue.slice(1);
+                } else {
+                    currValue = "-" + currValue;
+                }
+                renderScreen();
+            })
+        } else {
+            button.addEventListener("click", () => {
+                currValue = (Number.parseFloat(currValue) / 100).toString();
+                renderScreen();
+            })
+        }
     } else if ((i + 1) % 4 == 0) {
         button.classList.add("operator");
     } else if (i == 18) {
@@ -79,16 +101,11 @@ for (let i = 0; i < 19; i++) {
         button.addEventListener("click", () => {
             if (i == 16 && !alreadyDecimal) {
                 currValue += button.textContent;
-                displayValue += button.textContent;
                 alreadyDecimal = true;
             } else if (i !=16) {
                 currValue += button.textContent;
-                displayValue += button.textContent;
             }
-            if (displayValue.length > 8) {
-                displayValue = displayValue.slice(1);
-            }
-            screen.textContent = displayValue;
+            renderScreen();
         })
     }
     buttons.appendChild(button);
