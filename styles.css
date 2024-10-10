@@ -37,7 +37,7 @@ body {
     display: flex;
     flex-wrap: wrap;
     padding: 5px;
-    background-color: C6E5F9;
+    background-color: #C6E5F9;
     border-radius: 5px;
     gap: 5px;
 }
@@ -75,4 +75,8 @@ body {
     background-color: #FF9E4D;
     border: solid #D65729 2px;
     color: #D65729;
+}
+
+.pressed {
+    background-color: red;
 }
