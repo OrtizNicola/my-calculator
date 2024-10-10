@@ -62,6 +62,14 @@ for (let i = 0; i < 19; i++) {
     addPressedStyle(button, i);
     if (i < 3) {
         button.classList.add("special");
+        if (i == 0) {
+            button.addEventListener("click", () => {
+                displayValue = "";
+                currValue = "";
+                storedValue = "";
+                screen.textContent = displayValue;
+            })
+        } 
     } else if ((i + 1) % 4 == 0) {
         button.classList.add("operator");
     } else if (i == 18) {
@@ -70,10 +78,15 @@ for (let i = 0; i < 19; i++) {
         button.classList.add("number");
         button.addEventListener("click", () => {
             if (i == 16 && !alreadyDecimal) {
+                currValue += button.textContent;
                 displayValue += button.textContent;
                 alreadyDecimal = true;
             } else if (i !=16) {
+                currValue += button.textContent;
                 displayValue += button.textContent;
+            }
+            if (displayValue.length > 8) {
+                displayValue = displayValue.slice(1);
             }
             screen.textContent = displayValue;
         })

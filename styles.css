@@ -21,7 +21,7 @@ body {
 }
 
 .screen {
-    padding: 0px 20px;
+    padding: 0px 11px;
     background-color: #CCCCCC;
     flex: 0 0 100px;
     display: flex;
@@ -81,5 +81,7 @@ body {
 }
 
 .pressed {
-    background-color: #FAFAD2;
+    background-color: #AEC6CF;
+    border: solid #AEC6CF 2px;
+    color: #AEC6CF;
 }
